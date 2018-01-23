@@ -1,0 +1,59 @@
+{
+  "id": "/beakerx",
+  "backoffFactor": 1.15,
+  "backoffSeconds": 1,
+  "cmd": "/usr/local/bin/notebook.sh",
+  "container": {
+    "type": "MESOS",
+    "volumes": [],
+    "docker": {
+      "image": "keithmcclellan/beakerx-dcos:latest",
+      "forcePullImage": false,
+      "parameters": []
+    }
+  },
+  "cpus": 1,
+  "disk": 0,
+  "env": {
+    "TERM": "xterm-256color"
+  },
+  "instances": 1,
+  "labels": {
+    "HAPROXY_0_REDIRECT_TO_HTTPS": "true",
+    "HAPROXY_GROUP": "external",
+    "HAPROXY_0_ENABLED": "true",
+    "MARATHON_SINGLE_INSTANCE_APP": "true",
+    "HAPROXY_0_VHOST": "vhost.example.com"
+  },
+  "maxLaunchDelaySeconds": 3600,
+  "mem": 2048,
+  "gpus": 0,
+  "networks": [
+    {
+      "mode": "host"
+    }
+  ],
+  "portDefinitions": [
+    {
+      "labels": {
+        "VIP_0": "/beakerx:8888"
+      },
+      "name": "jupyter",
+      "protocol": "tcp",
+      "port": 10101
+    }
+  ],
+  "requirePorts": false,
+  "upgradeStrategy": {
+    "maximumOverCapacity": 0,
+    "minimumHealthCapacity": 0
+  },
+  "killSelection": "YOUNGEST_FIRST",
+  "unreachableStrategy": {
+    "inactiveAfterSeconds": 0,
+    "expungeAfterSeconds": 0
+  },
+  "healthChecks": [],
+  "fetch": [],
+  "constraints": []
+}
